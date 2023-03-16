@@ -31,8 +31,34 @@ output_data = np.zeros(len(input_data))
 # *************************
 # * PROCESSING COMES HERE *
 # *************************
+a = 0.5
+d = 30000
+f = 4000
+selectEffect = 3
 
-output_data = input_data
+if selectEffect == 1:
+    for i in range(d):
+        output_data[i] = input_data[i]
+    for n in range(d, len(output_data)):
+        output_data[n] = input_data[n] + a * output_data[n - d]
+
+if selectEffect == 2:
+    for i in range(len(output_data)):
+        output_data[i] = (1 + a * np.cos(2 * np.pi * f * i/fs)) * input_data[i]
+        
+        
+
+# Source : DAFX.pdf
+# Distortion based on an exponential function
+# x - input
+# gain - amount of distortion
+# mix - mix of original and distorted sound, 1=only distorted, 0.5=equal mix, 0=only original
+
+if selectEffect==3:
+    mix = 0.5
+    x = input_data
+    output_data = (1-mix)*x + mix*np.sign(x)*np.log(1+255*np.abs(x))/np.log(256)
+
 
 # *************************
 
