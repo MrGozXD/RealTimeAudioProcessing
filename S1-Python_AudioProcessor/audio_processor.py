@@ -49,15 +49,39 @@ if selectEffect == 2:
         
 
 # Source : DAFX.pdf
-# Distortion based on an exponential function
+# Distortion based on an exponential function 
 # x - input
 # gain - amount of distortion
 # mix - mix of original and distorted sound, 1=only distorted, 0.5=equal mix, 0=only original
+# q=x*gain/max(abs(x));
+# z=sign(q).*(1-exp(sign(-q).*q));
+# y=mix*z*max(abs(x))/max(abs(z))+(1-mix)*x;
+# y=y*max(abs(x))/max(abs(y));
+
+if selectEffect == 3:
+    mix = 0.5
+    gain = 100 # amount of distortion
+    x = input_data
+    q = x * gain / max(abs(x))
+    z = np.sign(q) * (1 - np.exp(np.sign(-q) * q))
+    output_data = mix * z * max(abs(x)) / max(abs(z)) + (1 - mix) * x
+    output_data = output_data * max(abs(x)) / max(abs(output_data))
+
+"""
 
 if selectEffect==3:
-    mix = 0.5
+    mix = 1
     x = input_data
     output_data = (1-mix)*x + mix*np.sign(x)*np.log(1+255*np.abs(x))/np.log(256)
+
+# distorsion effect based on exponential function
+
+if selectEffect==3:
+    gain=1
+    exponent=1
+    output_data = gain * np.power(np.abs(input_data), exponent) * np.sign(input_data)
+    #output_signal /= np.max(np.abs(output_signal))
+"""
 
 
 # *************************
