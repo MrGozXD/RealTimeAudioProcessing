@@ -65,7 +65,8 @@ if selectEffect == 3:
     q = x * gain / max(abs(x))
     z = np.sign(q) * (1 - np.exp(np.sign(-q) * q))
     output_data = mix * z * max(abs(x)) / max(abs(z)) + (1 - mix) * x
-    output_data = output_data * max(abs(x)) / max(abs(output_data))
+    #No need to normalize  
+    #output_data = output_data * max(abs(x)) / max(abs(output_data))
 
 """
 

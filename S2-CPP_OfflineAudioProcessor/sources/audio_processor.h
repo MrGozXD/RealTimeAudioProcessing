@@ -6,6 +6,8 @@
 #define OFFLINE_AUDIO_PROCESSOR_AUDIO_PROCESSOR_H
 
 
+
+
 class AudioProcessor {
 
     public:
@@ -20,10 +22,17 @@ class AudioProcessor {
     // Process
     void Process(float* input_buffer, float* output_buffer, int number_frames);
 
+    // Distortion
+    void setDistoGain(int gain);
+    void setDistoMix(float mix);
+    void Distortion(float* input_buffer, float* output_buffer, int number_frames, int gain, float mix);
+
+
     private:
     // persistent data members
     // ex: float        sampleRate;
-    //
+    int distoGain=300;
+    float distoMix=0.5;
     // pre-allocated memory
     // ex: | float *    memoryBuffer;
     //     | int        memoryBufferLength;
