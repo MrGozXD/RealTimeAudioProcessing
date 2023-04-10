@@ -52,7 +52,7 @@ int main( int argc, char *argv[]) {
         memcpy(input_buffer, input_file->samples[0].data() + number_processed_frames, batch_size*sizeof(float));
 
         //processor->Process(input_buffer, output_buffer, batch_size);
-        processor->Distortion(input_buffer, output_buffer, batch_size, DISTO_GAIN, MIX);
+        processor->Distortion(input_buffer, output_buffer, batch_size, DISTO_GAIN, MIX); // The output isn't distorted. Why? IDK
         
         memcpy(output_file->samples[0].data() + number_processed_frames, output_buffer, batch_size*sizeof(float));
         number_processed_frames += batch_size;
