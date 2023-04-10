@@ -56,7 +56,7 @@ void AudioProcessor::Distortion(float* input_buffer, float* output_buffer, int n
         float z=std::signbit(q) ? (1-expf(std::signbit(-q)*q)) : (1-expf(-q));
         output_buffer[i] = distoMix*z*std::abs(input_buffer[i])/std::abs(z) + (1-distoMix)*input_buffer[i];
         */
-       output_buffer[i] = std::signbit(input_buffer[i]) ? mix*(1-expf(-distoGain*input_buffer[i])) : mix*(-1+expf(distoGain*input_buffer[i]);
+       output_buffer[i] = std::signbit(input_buffer[i]) ? mix*(1-expf(-distoGain*input_buffer[i])) : mix*(-1+expf(distoGain*input_buffer[i]));
 
        /*
         if (input_buffer[i] > 0) {
